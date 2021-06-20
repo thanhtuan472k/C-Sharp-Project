@@ -1,0 +1,73 @@
+﻿@model ModelEF.Model.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Xem Chi Tiết Sản Phẩm</h2>
+
+<div >
+    <hr />
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Category.NameCategory)
+        </dt>
+
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Category.NameCategory)
+        </dd>
+
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.NameProduct)
+        </dt>
+
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.NameProduct)
+        </dd>
+
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.UnitCost)
+        </dt>
+
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.UnitCost)
+        </dd>
+
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.ImageProduct)
+        </dt>
+
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.ImageProduct)
+        </dd>
+
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.StatusProduct)
+        </dt>
+
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.StatusProduct)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Quay Lại", "Index")
+</p>

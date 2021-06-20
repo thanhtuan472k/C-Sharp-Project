@@ -1,0 +1,88 @@
+﻿@model PagedList.IPagedList<ModelEF.Model.UserAccount>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Quản Lý Tài Khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<link href="~/Public/css/pageList.css" rel="stylesheet" />
+<h2>Quản Lý Tài Khoản</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+</p>
+
+<div class="col">
+    @using (Html.BeginForm("Index", "UserAccount", FormMethod.Get, new { @class = "table-responsive" }))
+    {
+        <div class="form-group col-8">  <input type="text" name="searchString" value="" placeholder="Nhập user cần tìm kiếm" class="form-control w-100" /></div>
+        <div class="form-group col-4"> <button type="submit" class="btn btn-block btn-default">Tìm Kiếm</button></div>
+    }
+
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered  table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Username)*@
+                    Username
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Password)*@
+                    Password
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.StatusAcc)*@
+                    StatusACC
+                </th>
+                <th>Thao Tác</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusAcc)
+                </td>
+
+                @{
+                    if (String.Compare(item.StatusAcc, "Blocked", true) == 0)
+                    {
+                    <td>
+                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                   {
+                       OnComplete = "$'(#row_" + item.ID + "').remove()",
+                       HttpMethod = "Delete"
+                   })
+                    </td>   
+                    }
+                    else
+                    {
+                        <td>Un Delete</td>
+                    }
+                    
+                }
+
+            </tr>
+        </tbody>
+        }
+
+    </table>
+</div>
+<div class="d-flex justify-content-between">
+      <div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+        <div>
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </div>
+</div>
+
